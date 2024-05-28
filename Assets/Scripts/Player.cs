@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator ani;
 
     [SerializeField] public bool isLifepPlayer = true;
+    [SerializeField] public bool isDamagePlayer = false;
     [SerializeField] private float SpeedPlayer;
     [SerializeField] private float JumpForce;
 
@@ -114,14 +115,17 @@ public class Player : MonoBehaviour
         {
             Debug.Log("check ground true");
             isOnGround = true; // Đặt biến isOnGround thành true khi va chạm với ground
+            isJumped = false;
         }
-        else
+        #endregion
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
         {
             Debug.Log("check ground false");
             isOnGround = false;
+            isJumped = false;
         }
-        #endregion
-
     }
-
 }
